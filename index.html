@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharpside Construction | Alpine, Texas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:      #E7E2D6;
+    --stone-dim:  #DCD6C7;
+    --paper:      #F3F0E7;
+    --ink:        #23211C;
+    --ink-soft:   #55503F;
+    --rust:       #A8461F;
+    --rust-dim:   #8A3A19;
+    --slate:      #45677A;
+    --steel:      #8C8677;
+    --line:       rgba(35,33,28,0.16);
+
+    --display: 'Big Shoulders Display', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+
+    --clip: polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+    --clip-sm: polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--stone);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:var(--display); margin:0; letter-spacing:0.01em; }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--rust);
+    display:inline-block;
+  }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  section{ position:relative; }
+
+  /* ---------- Dimension-line divider (signature device) ---------- */
+  .dim-rule{
+    display:flex; align-items:center; gap:8px;
+    color:var(--ink-soft);
+    font-family:var(--mono);
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    margin:0 0 28px;
+  }
+  .dim-rule .tick{ width:1px; height:9px; background:var(--line); }
+  .dim-rule .bar{ flex:1; height:1px; background:var(--line); position:relative; }
+  .dim-rule .bar::before,.dim-rule .bar::after{
+    content:""; position:absolute; top:-4px; width:1px; height:9px; background:var(--line);
+  }
+  .dim-rule .bar::before{ left:0; }
+  .dim-rule .bar::after{ right:0; }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(231,226,214,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1180px; margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:1.5rem;
+    letter-spacing:0.01em;
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none;
+  }
+  .logo .mark{
+    width:20px; height:20px;
+    background:var(--rust);
+    clip-path:polygon(0 6px,6px 0,100% 0,100% 100%,0 100%);
+  }
+  .logo span.sub{
+    font-family:var(--mono); font-weight:400; font-size:0.62rem;
+    letter-spacing:0.1em; color:var(--ink-soft); text-transform:uppercase;
+    display:block; margin-top:-4px;
+  }
+  .nav-links{
+    display:flex; gap:30px; list-style:none; margin:0; padding:0;
+    font-size:0.92rem; font-weight:500;
+  }
+  .nav-links a{ text-decoration:none; position:relative; padding-bottom:4px; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--rust); transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    background:var(--ink); color:var(--paper);
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.05em;
+    padding:10px 18px; text-decoration:none;
+    clip-path:var(--clip-sm);
+    white-space:nowrap;
+  }
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; }
+  .nav-toggle span{ display:block; width:24px; height:2px; background:var(--ink); margin:5px 0; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:64px 0 0;
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,6vw,4.6rem);
+    line-height:0.96;
+    font-weight:800;
+    text-transform:uppercase;
+  }
+  .hero h1 .accent{ color:var(--rust); }
+  .hero p.lede{
+    font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin:22px 0 30px;
+  }
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+  .btn{
+    font-family:var(--mono); font-size:0.82rem; letter-spacing:0.05em;
+    text-decoration:none; padding:14px 26px; display:inline-block;
+    clip-path:var(--clip);
+  }
+  .btn-primary{ background:var(--rust); color:var(--paper); }
+  .btn-primary:hover{ background:var(--rust-dim); }
+  .btn-ghost{
+    border:1px solid var(--ink); color:var(--ink);
+    padding:13px 25px;
+  }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+
+  .ridge-wrap{ position:relative; }
+  .ridge-wrap svg{ width:100%; height:auto; }
+
+  .trust-strip{
+    margin-top:56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .trust-strip .wrap{
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .trust-item{
+    padding:22px 24px; border-left:1px solid var(--line);
+  }
+  .trust-item:first-child{ border-left:none; padding-left:0; }
+  .trust-item .num{ font-family:var(--display); font-size:2.1rem; font-weight:700; color:var(--rust); }
+  .trust-item .label{ font-family:var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--ink-soft); text-transform:uppercase; }
+
+  /* ---------- Section generic ---------- */
+  .section{ padding:96px 0; }
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head h2{
+    font-size:clamp(2rem,4vw,2.9rem); font-weight:700; text-transform:uppercase; margin-top:10px;
+  }
+  .section-alt{ background:var(--paper); }
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--stone); padding:32px 26px; min-height:230px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .section-alt .service-card{ background:var(--paper); }
+  .service-card .idx{ font-family:var(--mono); color:var(--rust); font-size:0.78rem; }
+  .service-card h3{ font-size:1.35rem; font-weight:700; margin:18px 0 10px; text-transform:uppercase; }
+  .service-card p{ font-size:0.92rem; color:var(--ink-soft); margin:0; }
+
+  /* ---------- Process ---------- */
+  .process-list{ display:flex; flex-direction:column; }
+  .process-row{
+    display:grid; grid-template-columns:90px 1fr 1.3fr; gap:28px;
+    padding:30px 0; border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .process-list .process-row:last-child{ border-bottom:1px solid var(--line); }
+  .process-row .step-num{
+    font-family:var(--display); font-size:2.6rem; font-weight:800; color:var(--rust-dim);
+    opacity:0.85;
+  }
+  .process-row h3{ font-size:1.25rem; text-transform:uppercase; font-weight:700; padding-top:6px;}
+  .process-row p{ margin:8px 0 0; color:var(--ink-soft); font-size:0.95rem; max-width:52ch; }
+
+  /* ---------- Work gallery ---------- */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .gallery-item{
+    clip-path:var(--clip);
+    background:linear-gradient(155deg,var(--steel),var(--ink) 130%);
+    aspect-ratio:4/3;
+    position:relative;
+    overflow:hidden;
+  }
+  .gallery-item .gcap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:16px 18px;
+    background:linear-gradient(0deg,rgba(35,33,28,0.85),transparent);
+    color:var(--paper);
+  }
+  .gallery-item .gcap .t{ font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; }
+  .gallery-item svg{ position:absolute; inset:0; width:100%; height:100%; opacity:0.5; }
+  .gallery-note{
+    font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft);
+    margin-top:18px;
+  }
+
+  /* ---------- Local values ---------- */
+  .values-wrap{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start; }
+  .values-wrap p{ color:var(--ink-soft); font-size:1.02rem; max-width:52ch; }
+  .value-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0; }
+  .value-list li{
+    padding:20px 0; border-top:1px solid var(--line);
+    display:flex; gap:18px; align-items:baseline;
+  }
+  .value-list li:last-child{ border-bottom:1px solid var(--line); }
+  .value-list .vt{ font-family:var(--mono); color:var(--rust); font-size:0.78rem; min-width:34px; }
+  .value-list strong{ display:block; font-family:var(--display); font-size:1.1rem; text-transform:uppercase; font-weight:700; }
+  .value-list span.desc{ color:var(--ink-soft); font-size:0.92rem; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  .contact-info h3{ font-size:1.7rem; text-transform:uppercase; font-weight:700; margin-bottom:18px; }
+  .info-row{ display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--line); }
+  .info-row:last-child{ border-bottom:1px solid var(--line); }
+  .info-row .k{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); text-transform:uppercase; min-width:90px; padding-top:2px;}
+  .info-row .v{ font-weight:500; }
+  .info-row a.v{ text-decoration:none; }
+  .info-row a.v:hover{ color:var(--rust); }
+
+  form{ display:flex; flex-direction:column; gap:16px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); }
+  .field input, .field textarea, .field select{
+    font-family:var(--body); font-size:0.95rem; padding:12px 14px;
+    background:var(--paper); border:1px solid var(--line); color:var(--ink);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{
+    outline:2px solid var(--slate); outline-offset:1px;
+  }
+  form .btn{ align-self:flex-start; border:none; cursor:pointer; margin-top:6px; }
+  .form-note{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); margin-top:4px; }
+
+  footer{
+    border-top:1px solid var(--line); padding:40px 0; background:var(--ink); color:var(--stone);
+  }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  footer .logo{ color:var(--stone); }
+  footer .foot-links{ display:flex; gap:24px; list-style:none; margin:0; padding:0; font-size:0.85rem; }
+  footer .foot-links a{ text-decoration:none; color:var(--steel); }
+  footer .foot-links a:hover{ color:var(--paper); }
+  footer .fine{ font-family:var(--mono); font-size:0.7rem; color:var(--steel); margin-top:22px; }
+
+  @media (max-width: 900px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .ridge-wrap{ order:-1; }
+    .trust-strip .wrap{ grid-template-columns:repeat(2,1fr); }
+    .trust-item:nth-child(3){ border-left:none; }
+    .services-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid{ grid-template-columns:1fr; }
+    .values-wrap, .contact-grid{ grid-template-columns:1fr; }
+    .process-row{ grid-template-columns:60px 1fr; }
+    .process-row > p{ grid-column:2/3; }
+  }
+  @media (max-width: 620px){
+    .nav-links, .nav-cta{ display:none; }
+    .nav-toggle{ display:block; }
+    .services-grid{ grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo">
+      <span class="mark"></span>
+      <span>SHARPSIDE<span class="sub">Construction — Alpine, TX</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get an estimate</a>
+    <button class="nav-toggle" aria-label="menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">General Contractor · Alpine, Texas</p>
+        <h1>Sharp lines.<br>Solid <span class="accent">ground.</span></h1>
+        <p class="lede">Custom builds, additions, and remodels for the Big Bend region — framed to hold up against high-desert wind, caliche soil, and 40&deg;&nbsp;F swings between sunrise and noon.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Request a free estimate</a>
+          <a href="tel:+14323867991" class="btn btn-ghost">(432) 386-7991</a>
+        </div>
+      </div>
+      <div class="ridge-wrap">
+        <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,360 0,220 60,150 110,210 150,120 200,230 250,90 300,220 340,160 390,240 430,180 480,260 480,360" fill="#8C8677" opacity="0.55"/>
+          <polygon points="0,360 0,260 70,190 130,250 190,160 240,260 300,140 350,240 400,190 480,300 480,360" fill="#45677A" opacity="0.5"/>
+          <polygon points="0,360 0,300 90,240 160,290 220,220 280,300 340,210 400,290 480,240 480,360" fill="#23211C"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="trust-strip">
+      <div class="wrap">
+        <div class="trust-item">
+          <div class="num">Local</div>
+          <div class="label">Based in Alpine, TX</div>
+        </div>
+        <div class="trust-item">
+          <div class="num">Licensed</div>
+          <div class="label">&amp; insured crew</div>
+        </div>
+        <div class="trust-item">
+          <div class="num">1&nbsp;job</div>
+          <div class="label">At a time, done right</div>
+        </div>
+        <div class="trust-item">
+          <div class="num">Big&nbsp;Bend</div>
+          <div class="label">Region-wide service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>01 — What we build</span><span class="bar"></span><span class="tick"></span></div>
+        <h2>Four ways we work</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="idx">A</span>
+          <div>
+            <h3>Additions &amp; remodels</h3>
+            <p>Kitchens, bathrooms, room additions, and full interior reworks — built around how the house already sits.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="idx">B</span>
+          <div>
+            <h3>Custom new builds</h3>
+            <p>Ground-up homes and guest structures, sited and framed for West Texas heat, wind, and light.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="idx">C</span>
+          <div>
+            <h3>Repair &amp; restoration</h3>
+            <p>Foundation, framing, and siding repair for older Alpine homes — stucco, adobe, and board-and-batten.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="idx">D</span>
+          <div>
+            <h3>Decks &amp; outdoor living</h3>
+            <p>Covered patios, decks, and outdoor kitchens built to take advantage of Big Bend evenings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section section-alt" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>02 — How a project runs</span><span class="bar"></span><span class="tick"></span></div>
+        <h2>From first call to final walkthrough</h2>
+      </div>
+      <div class="process-list">
+        <div class="process-row">
+          <div class="step-num">01</div>
+          <h3>On-site consult</h3>
+          <p>We walk the property with you, talk through what's not working, and take real measurements before anything is quoted.</p>
+        </div>
+        <div class="process-row">
+          <div class="step-num">02</div>
+          <h3>Scope &amp; estimate</h3>
+          <p>A written estimate with materials, timeline, and cost broken out — no vague allowances buried in the total.</p>
+        </div>
+        <div class="process-row">
+          <div class="step-num">03</div>
+          <h3>Build</h3>
+          <p>One crew, one job at a time. You'll know who's on-site and what's happening each week of the build.</p>
+        </div>
+        <div class="process-row">
+          <div class="step-num">04</div>
+          <h3>Walkthrough &amp; warranty</h3>
+          <p>We finish with a final walkthrough together, and stand behind the work after we've left the site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>03 — Recent work</span><span class="bar"></span><span class="tick"></span></div>
+        <h2>A few projects around Alpine</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <svg viewBox="0 0 400 300"><polygon points="0,300 0,180 100,110 200,190 300,90 400,170 400,300" fill="#45677A" opacity="0.5"/></svg>
+          <div class="gcap"><div class="t">Kitchen remodel</div></div>
+        </div>
+        <div class="gallery-item">
+          <svg viewBox="0 0 400 300"><polygon points="0,300 0,200 120,130 220,200 320,110 400,190 400,300" fill="#A8461F" opacity="0.45"/></svg>
+          <div class="gcap"><div class="t">Covered patio build</div></div>
+        </div>
+        <div class="gallery-item">
+          <svg viewBox="0 0 400 300"><polygon points="0,300 0,160 90,100 210,180 300,80 400,160 400,300" fill="#8C8677" opacity="0.5"/></svg>
+          <div class="gcap"><div class="t">Guest house addition</div></div>
+        </div>
+      </div>
+      <p class="gallery-note">— placeholders shown above. Swap in real job-site photos here before this goes live.</p>
+    </div>
+  </section>
+
+  <!-- WHY LOCAL -->
+  <section class="section section-alt">
+    <div class="wrap values-wrap">
+      <div>
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>04 — Why local matters</span></div>
+        <h2 style="font-size:2.2rem; text-transform:uppercase; font-weight:700;">Built by people who live here too</h2>
+        <p>A contractor from out of the region can frame a house. They can't tell you why your neighbor's foundation cracked, or which side of the lot catches the worst of a spring wind. We can — because we're working the same ground.</p>
+      </div>
+      <ul class="value-list">
+        <li>
+          <span class="vt">01</span>
+          <div><strong>Caliche-ready foundations</strong><span class="desc">Footings and drainage planned around the region's shifting caliche soil, not generic spec sheets.</span></div>
+        </li>
+        <li>
+          <span class="vt">02</span>
+          <div><strong>Built for the temperature swing</strong><span class="desc">Materials and insulation chosen for high-desert days that can swing 40 degrees before lunch.</span></div>
+        </li>
+        <li>
+          <span class="vt">03</span>
+          <div><strong>One crew, no subcontracted guesswork</strong><span class="desc">The people who quote the job are the people who show up to build it.</span></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>05 — Get in touch</span></div>
+        <h3>Let's talk about your project</h3>
+        <div class="info-row"><span class="k">Phone</span><a class="v" href="tel:+14323867991">(432) 386-7991</a></div>
+        <div class="info-row"><span class="k">Address</span><span class="v">301 N 17th St, Alpine, TX 79830</span></div>
+        <div class="info-row"><span class="k">Hours</span><span class="v">Mon–Fri, 7:00 AM – 5:00 PM</span></div>
+        <div class="info-row"><span class="k">Service area</span><span class="v">Alpine · Marfa · Fort Davis · Big Bend region</span></div>
+      </div>
+      <form onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.reset();">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" required placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" type="tel" required placeholder="(432) 000-0000">
+        </div>
+        <div class="field">
+          <label for="project">Project type</label>
+          <select id="project">
+            <option>Addition or remodel</option>
+            <option>New custom build</option>
+            <option>Repair or restoration</option>
+            <option>Deck or outdoor living</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="details">Project details</label>
+          <textarea id="details" rows="4" placeholder="What are you looking to build or fix?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send request</button>
+        <p class="form-note" id="form-success" style="display:none;">Request received — we'll call you back within one business day.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo"><span class="mark"></span><span>SHARPSIDE</span></a>
+    <ul class="foot-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="wrap fine">© 2026 Sharpside Construction, Alpine, TX. Site built as a sample — not yet the client's live site.</div>
+</footer>
+
+<script>
+  document.querySelector('.nav-toggle')?.addEventListener('click', () => {
+    document.querySelector('.nav-links').style.display =
+      document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex';
+  });
+</script>
+
+</body>
+</html>
