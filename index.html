@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --stone:      #E7E2D6;
-    --stone-dim:  #DCD6C7;
-    --paper:      #F3F0E7;
-    --ink:        #23211C;
-    --ink-soft:   #55503F;
-    --rust:       #A8461F;
-    --rust-dim:   #8A3A19;
-    --slate:      #45677A;
-    --steel:      #8C8677;
-    --line:       rgba(35,33,28,0.16);
+    --stone:      #E4E3DC;
+    --stone-dim:  #D7D5C9;
+    --paper:      #EFEEE7;
+    --ink:        #1E211C;
+    --ink-soft:   #52564C;
+    --green:      #3F7D3A;
+    --green-dim:  #2E5E2B;
+    --safety:     #8BC53F;
+    --steel:      #7C8580;
+    --line:       rgba(30,33,28,0.16);
 
     --display: 'Big Shoulders Display', sans-serif;
     --body: 'IBM Plex Sans', sans-serif;
@@ -45,7 +45,7 @@
     font-size:0.72rem;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    color:var(--rust);
+    color:var(--green);
     display:flex;
     align-items:center;
     gap:10px;
@@ -53,11 +53,34 @@
   .eyebrow::before{
     content:"";
     width:22px; height:1px;
-    background:var(--rust);
+    background:var(--green);
     display:inline-block;
   }
   .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
   section{ position:relative; }
+
+  /* ---------- Caution-stripe divider (construction signature device) ---------- */
+  .caution-stripe{
+    height:10px;
+    background:repeating-linear-gradient(
+      45deg,
+      var(--green) 0 18px,
+      var(--ink) 18px 36px
+    );
+  }
+
+  /* ---------- Placeholder image blocks ---------- */
+  .img-placeholder{
+    position:relative;
+    background:
+      repeating-linear-gradient(45deg, rgba(30,33,28,0.08) 0 10px, transparent 10px 20px),
+      var(--stone-dim);
+    border:1px dashed var(--ink-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft);
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase;
+    text-align:center; padding:12px;
+  }
 
   /* ---------- Dimension-line divider (signature device) ---------- */
   .dim-rule{
@@ -97,7 +120,7 @@
   }
   .logo .mark{
     width:20px; height:20px;
-    background:var(--rust);
+    background:var(--green);
     clip-path:polygon(0 6px,6px 0,100% 0,100% 100%,0 100%);
   }
   .logo span.sub{
@@ -112,7 +135,7 @@
   .nav-links a{ text-decoration:none; position:relative; padding-bottom:4px; }
   .nav-links a::after{
     content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
-    background:var(--rust); transition:width 0.25s ease;
+    background:var(--green); transition:width 0.25s ease;
   }
   .nav-links a:hover::after{ width:100%; }
   .nav-cta{
@@ -127,8 +150,7 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    padding:64px 0 0;
-    overflow:hidden;
+    overflow:visible;
   }
   .hero-inner{
     display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
@@ -139,7 +161,7 @@
     font-weight:800;
     text-transform:uppercase;
   }
-  .hero h1 .accent{ color:var(--rust); }
+  .hero h1 .accent{ color:var(--green); }
   .hero p.lede{
     font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin:22px 0 30px;
   }
@@ -149,8 +171,8 @@
     text-decoration:none; padding:14px 26px; display:inline-block;
     clip-path:var(--clip);
   }
-  .btn-primary{ background:var(--rust); color:var(--paper); }
-  .btn-primary:hover{ background:var(--rust-dim); }
+  .btn-primary{ background:var(--green); color:var(--paper); }
+  .btn-primary:hover{ background:var(--green-dim); }
   .btn-ghost{
     border:1px solid var(--ink); color:var(--ink);
     padding:13px 25px;
@@ -159,6 +181,21 @@
 
   .ridge-wrap{ position:relative; }
   .ridge-wrap svg{ width:100%; height:auto; }
+
+  .hero-photo{ position:relative; overflow:hidden; padding:64px 0 56px; }
+  .hero-bg-placeholder{ position:absolute; inset:0; z-index:0; border:none; border-radius:0; font-size:0.8rem; }
+  .hero-scrim{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(100deg, rgba(30,33,28,0.85) 0%, rgba(30,33,28,0.6) 55%, rgba(30,33,28,0.28) 100%);
+  }
+  .hero-photo .hero-inner{ position:relative; z-index:2; }
+  .hero-photo .eyebrow{ color:var(--safety); }
+  .hero-photo .eyebrow::before{ background:var(--safety); }
+  .hero-photo h1{ color:var(--paper); }
+  .hero-photo h1 .accent{ color:var(--safety); }
+  .hero-photo p.lede{ color:var(--stone); }
+  .hero-photo .btn-ghost{ border-color:var(--paper); color:var(--paper); }
+  .hero-photo .btn-ghost:hover{ background:var(--paper); color:var(--ink); }
 
   .trust-strip{
     margin-top:56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
@@ -170,7 +207,7 @@
     padding:22px 24px; border-left:1px solid var(--line);
   }
   .trust-item:first-child{ border-left:none; padding-left:0; }
-  .trust-item .num{ font-family:var(--display); font-size:2.1rem; font-weight:700; color:var(--rust); }
+  .trust-item .num{ font-family:var(--display); font-size:2.1rem; font-weight:700; color:var(--green); }
   .trust-item .label{ font-family:var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--ink-soft); text-transform:uppercase; }
 
   /* ---------- Section generic ---------- */
@@ -192,7 +229,7 @@
     display:flex; flex-direction:column; justify-content:space-between;
   }
   .section-alt .service-card{ background:var(--paper); }
-  .service-card .idx{ font-family:var(--mono); color:var(--rust); font-size:0.78rem; }
+  .service-card .idx{ font-family:var(--mono); color:var(--green); font-size:0.78rem; }
   .service-card h3{ font-size:1.35rem; font-weight:700; margin:18px 0 10px; text-transform:uppercase; }
   .service-card p{ font-size:0.92rem; color:var(--ink-soft); margin:0; }
 
@@ -205,7 +242,7 @@
   }
   .process-list .process-row:last-child{ border-bottom:1px solid var(--line); }
   .process-row .step-num{
-    font-family:var(--display); font-size:2.6rem; font-weight:800; color:var(--rust-dim);
+    font-family:var(--display); font-size:2.6rem; font-weight:800; color:var(--green-dim);
     opacity:0.85;
   }
   .process-row h3{ font-size:1.25rem; text-transform:uppercase; font-weight:700; padding-top:6px;}
@@ -222,6 +259,7 @@
     position:relative;
     overflow:hidden;
   }
+  .gallery-item .img-placeholder{ position:absolute; inset:0; border:none; border-radius:0; }
   .gallery-item .gcap{
     position:absolute; left:0; right:0; bottom:0;
     padding:16px 18px;
@@ -235,6 +273,18 @@
     margin-top:18px;
   }
 
+  /* ---------- Our team ---------- */
+  .team-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .team-card{ text-align:center; }
+  .team-photo{
+    aspect-ratio:1/1; clip-path:var(--clip); overflow:hidden; margin-bottom:18px;
+  }
+  .team-photo .img-placeholder{ position:absolute; inset:0; border:none; border-radius:0; }
+  .team-photo{ position:relative; }
+  .team-card h3{ font-size:1.1rem; font-weight:700; text-transform:uppercase; margin-bottom:4px; }
+  .team-card .role{ font-family:var(--mono); font-size:0.72rem; color:var(--green); letter-spacing:0.04em; text-transform:uppercase; margin-bottom:10px; }
+  .team-card p{ font-size:0.88rem; color:var(--ink-soft); margin:0; }
+
   /* ---------- Local values ---------- */
   .values-wrap{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start; }
   .values-wrap p{ color:var(--ink-soft); font-size:1.02rem; max-width:52ch; }
@@ -244,7 +294,7 @@
     display:flex; gap:18px; align-items:baseline;
   }
   .value-list li:last-child{ border-bottom:1px solid var(--line); }
-  .value-list .vt{ font-family:var(--mono); color:var(--rust); font-size:0.78rem; min-width:34px; }
+  .value-list .vt{ font-family:var(--mono); color:var(--green); font-size:0.78rem; min-width:34px; }
   .value-list strong{ display:block; font-family:var(--display); font-size:1.1rem; text-transform:uppercase; font-weight:700; }
   .value-list span.desc{ color:var(--ink-soft); font-size:0.92rem; }
 
@@ -258,7 +308,7 @@
   .info-row .k{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); text-transform:uppercase; min-width:90px; padding-top:2px;}
   .info-row .v{ font-weight:500; }
   .info-row a.v{ text-decoration:none; }
-  .info-row a.v:hover{ color:var(--rust); }
+  .info-row a.v:hover{ color:var(--green); }
 
   form{ display:flex; flex-direction:column; gap:16px; }
   .field{ display:flex; flex-direction:column; gap:6px; }
@@ -268,7 +318,7 @@
     background:var(--paper); border:1px solid var(--line); color:var(--ink);
   }
   .field input:focus, .field textarea:focus, .field select:focus{
-    outline:2px solid var(--slate); outline-offset:1px;
+    outline:2px solid var(--green); outline-offset:1px;
   }
   form .btn{ align-self:flex-start; border:none; cursor:pointer; margin-top:6px; }
   .form-note{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); margin-top:4px; }
@@ -290,6 +340,7 @@
     .trust-item:nth-child(3){ border-left:none; }
     .services-grid{ grid-template-columns:repeat(2,1fr); }
     .gallery-grid{ grid-template-columns:1fr; }
+    .team-grid{ grid-template-columns:1fr; }
     .values-wrap, .contact-grid{ grid-template-columns:1fr; }
     .process-row{ grid-template-columns:60px 1fr; }
     .process-row > p{ grid-column:2/3; }
@@ -317,6 +368,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get an estimate</a>
@@ -328,7 +380,10 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="wrap hero-inner">
+    <div class="hero-photo">
+      <div class="img-placeholder hero-bg-placeholder">📷 Add job-site background photo here</div>
+      <div class="hero-scrim"></div>
+      <div class="wrap hero-inner">
       <div>
         <p class="eyebrow">General Contractor · Alpine, Texas</p>
         <h1>Sharp lines.<br>Solid <span class="accent">ground.</span></h1>
@@ -340,12 +395,15 @@
       </div>
       <div class="ridge-wrap">
         <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="0,360 0,220 60,150 110,210 150,120 200,230 250,90 300,220 340,160 390,240 430,180 480,260 480,360" fill="#8C8677" opacity="0.55"/>
-          <polygon points="0,360 0,260 70,190 130,250 190,160 240,260 300,140 350,240 400,190 480,300 480,360" fill="#45677A" opacity="0.5"/>
-          <polygon points="0,360 0,300 90,240 160,290 220,220 280,300 340,210 400,290 480,240 480,360" fill="#23211C"/>
+          <polygon points="0,360 0,220 60,150 110,210 150,120 200,230 250,90 300,220 340,160 390,240 430,180 480,260 480,360" fill="#8C8677" opacity="0.5"/>
+          <polygon points="0,360 0,260 70,190 130,250 190,160 240,260 300,140 350,240 400,190 480,300 480,360" fill="#3F7D3A" opacity="0.45"/>
+          <polygon points="0,360 0,300 90,240 160,290 220,220 280,300 340,210 400,290 480,240 480,360" fill="#1E211C"/>
         </svg>
       </div>
+      </div>
     </div>
+
+    <div class="caution-stripe"></div>
 
     <div class="trust-strip">
       <div class="wrap">
@@ -450,15 +508,15 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item">
-          <svg viewBox="0 0 400 300"><polygon points="0,300 0,180 100,110 200,190 300,90 400,170 400,300" fill="#45677A" opacity="0.5"/></svg>
+          <div class="img-placeholder">📷 Add photo:<br>Kitchen remodel</div>
           <div class="gcap"><div class="t">Kitchen remodel</div></div>
         </div>
         <div class="gallery-item">
-          <svg viewBox="0 0 400 300"><polygon points="0,300 0,200 120,130 220,200 320,110 400,190 400,300" fill="#A8461F" opacity="0.45"/></svg>
+          <div class="img-placeholder">📷 Add photo:<br>Covered patio build</div>
           <div class="gcap"><div class="t">Covered patio build</div></div>
         </div>
         <div class="gallery-item">
-          <svg viewBox="0 0 400 300"><polygon points="0,300 0,160 90,100 210,180 300,80 400,160 400,300" fill="#8C8677" opacity="0.5"/></svg>
+          <div class="img-placeholder">📷 Add photo:<br>Guest house addition</div>
           <div class="gcap"><div class="t">Guest house addition</div></div>
         </div>
       </div>
@@ -466,11 +524,41 @@
     </div>
   </section>
 
+  <!-- OUR TEAM -->
+  <section class="section section-alt" id="team">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>04 — Our team</span><span class="bar"></span><span class="tick"></span></div>
+        <h2>The people on the job</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo"><div class="img-placeholder">📷 Add photo:<br>Owner</div></div>
+          <h3>Name here</h3>
+          <div class="role">Owner &amp; General Contractor</div>
+          <p>Runs every job site personally — quotes it, builds it, stands behind it.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><div class="img-placeholder">📷 Add photo:<br>Lead Carpenter</div></div>
+          <h3>Name here</h3>
+          <div class="role">Lead Carpenter</div>
+          <p>Framing, finish work, and the detail work that makes a remodel feel right.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><div class="img-placeholder">📷 Add photo:<br>Project Coordinator</div></div>
+          <h3>Name here</h3>
+          <div class="role">Project Coordinator</div>
+          <p>Keeps the schedule, materials, and communication on track from quote to walkthrough.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- WHY LOCAL -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="wrap values-wrap">
       <div>
-        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>04 — Why local matters</span></div>
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>05 — Why local matters</span></div>
         <h2 style="font-size:2.2rem; text-transform:uppercase; font-weight:700;">Built by people who live here too</h2>
         <p>A contractor from out of the region can frame a house. They can't tell you why your neighbor's foundation cracked, or which side of the lot catches the worst of a spring wind. We can — because we're working the same ground.</p>
       </div>
@@ -495,7 +583,7 @@
   <section class="section" id="contact">
     <div class="wrap contact-grid">
       <div class="contact-info">
-        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>05 — Get in touch</span></div>
+        <div class="dim-rule"><span class="tick"></span><span class="bar"></span><span>06 — Get in touch</span></div>
         <h3>Let's talk about your project</h3>
         <div class="info-row"><span class="k">Phone</span><a class="v" href="tel:+14323867991">(432) 386-7991</a></div>
         <div class="info-row"><span class="k">Address</span><span class="v">301 N 17th St, Alpine, TX 79830</span></div>
@@ -540,6 +628,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
